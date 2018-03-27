@@ -37,20 +37,21 @@
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
-    "gulp": "^3.9.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-ruby-sass": "^2.0.6",
     "jest": "^20.0.4",
     "jest-cli": "^20.0.4",
     "jest-enzyme": "^4.0.1",
-    "prop-types": "^15.5.10",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
     "babel-preset-stage-1": "^6.1.18",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-ruby-sass": "^2.0.6",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
-    "react-game-kit": "^1.0.6"
+    "react-game-kit": "^1.0.6",
+    "prop-types": "^15.5.10"
   }
 }
