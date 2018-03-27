@@ -2,6 +2,8 @@ import { configure } from 'enzyme';
 import React from 'react';
 import { shallow, render } from 'enzyme';
 
+import App from '../components/app';
+
 describe('<App /> component', () => {
 
   it('renders on the page', () => {
