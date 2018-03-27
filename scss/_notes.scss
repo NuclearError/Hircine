@@ -1,0 +1,26 @@
+.note {
+	@include border-radius($rounded);  
+	margin: 1rem 2rem;
+	padding: 0.75rem;
+	text-align: center;
+}
+
+.note--sow-indoors {
+	@include noteGradient($sow-indoors);
+}
+
+.note--plant {
+	@include noteGradient($plant-outside);
+}
+
+.note--harvest {
+	@include noteGradient($harvest);
+}
+
+.note--sow-outdoors {
+	@include noteGradient($sow-outside);
+}
+
+.note--maintenance {
+	@include noteGradient($maintenance);
+}

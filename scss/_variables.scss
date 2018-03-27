@@ -1,0 +1,102 @@
+
+$screen-xs: 		320px;
+$screen-sm: 		480px;
+$screen-md: 		640px;
+$screen-lg: 		800px;
+$screen-xl: 		960px;
+
+$font-family-sans-serif:  	Gill Sans,Gill Sans MT,Calibri,sans-serif;
+$font-family-serif: 		    Baskerville,"Baskerville Old Face","Hoefler Text",Garamond,"Times New Roman",serif;
+$font-size-base: 			      18px;
+$font-size-h1:				      30px;
+$font-size-h2:				      $font-size-h1/1.125;
+$font-size-h3:				      $font-size-h2/1.4;
+
+$base-white: 	   #fff;
+$base-black: 	   #000; /* base colours are useful when using lighten/darken etc */
+
+$grey-dark: 		 #333;
+$grey-light: 	   #efefef;
+
+$sow-indoors:      #b6e026; // pale green
+$plant-outside:    #6ac10d; // green
+$harvest:          #e5b700; // amber
+$sow-outside:      #15965c; // teal
+$maintenance:      #04bdce; // light blue
+
+$spacing: 		   15px;
+$rounded:        $font-size-base/4;
+
+@mixin transition($args...) {
+	  -webkit-transition: $args;
+  	-moz-transition: $args;
+  	-ms-transition: $args;
+  	-o-transition: $args;
+  	transition: $args;
+}
+
+@mixin border-radius($radius) {
+	  border-radius: $radius;
+	  -webkit-border-radius: $radius;
+	  -moz-border-radius: $radius;
+	  -ms-border-radius: $radius;
+	  -o-border-radius: $radius;
+}
+
+@mixin flexbox() {
+	  display: -webkit-box;
+  	display: -webkit-flex;
+  	display: -ms-flexbox;
+  	display: flex;
+  	-webkit-flex-direction: row;
+  	-ms-flex-direction: row;
+  	flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+}
+
+@mixin flexbox-child() {
+ 	  -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    -webkit-align-self: auto;
+    -ms-flex-item-align: auto;
+    align-self: auto;
+}
+
+@mixin linearGradient($top, $bottom) {
+    background: $top;
+    background: -moz-linear-gradient(top,  $top, $bottom);
+    background: -webkit-linear-gradient(top,  $top,$bottom);
+    background: -o-linear-gradient(top,  $top,$bottom);
+    background: -ms-linear-gradient(top,  $top,$bottom);
+    background: linear-gradient(to bottom,  $top,$bottom);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0 );
+}
+
+@mixin gradientFallbacks($fallback, $args...) {
+    background: $fallback;
+    background: -moz-linear-gradient(top,  $args);
+    background: -webkit-linear-gradient(top,  $args);
+    background: -o-linear-gradient(top,  $args);
+    background: -ms-linear-gradient(top,  $args);
+    background: linear-gradient(to bottom,  $args);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0 );
+}
+
+@mixin noteGradient($baseColor) {
+    $baseColor2:  darken( (saturate($baseColor, 5%)), 5% );
+    $baseColor3:  lighten($baseColor2, 7.5%);
+    $baseColor4:  mix($base-white, $baseColor3, 15%);
+    @include gradientFallbacks($baseColor, $baseColor 0%, $baseColor2 40%, $baseColor3 60%, $baseColor4 100%);
+}

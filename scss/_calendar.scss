@@ -1,0 +1,45 @@
+
+.calendar {
+  border: 1px solid $grey-dark;
+}
+
+.months-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.months-list__item:nth-child(2n) {
+  background: $grey-light;
+}
+
+.months-list__item {
+
+    border-top: 1px solid $grey-dark;
+
+  &:first-child {
+    border-top: none;
+  }
+
+  & > div {
+    display: inline-block;
+    padding: 0;
+    vertical-align: top;
+  }
+}
+
+.months-list-item {
+
+  &__label-container {
+    width: 15%;
+    text-align: center;
+  }
+
+  &__label {
+    cursor: pointer;
+  }
+
+  &__task-container {
+    width: 85%;
+  }
+}

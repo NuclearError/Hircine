@@ -1,0 +1,40 @@
+.task {
+
+    padding: 0 0 0 0.75rem;
+
+    &--sow-indoors {
+        background-color: $sow-indoors;
+    }
+
+    &--sow-outside {
+        background-color: $sow-outside;
+    }
+
+    &--plant-outside {
+        background-color: $plant-outside;
+    }
+
+    &--harvest {
+        background-color: $harvest;
+    }
+
+    &__title {
+        line-height: 1.75rem;
+    }
+
+    &__item-list {
+        padding: 0 0 0 1rem;
+    }
+
+    &__item {
+
+    }
+
+    &__item-variety {
+
+    }
+
+    &__item-name {
+
+    }
+}
