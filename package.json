@@ -1,7 +1,7 @@
 {
   "name": "Hircine",
   "version": "1.0.0",
-  "description": "Game development, using React Game Kit",
+  "description": "Game development!",
   "main": "index.js",
   "repository": "https://github.com/NuclearError/Hircine.git",
   "scripts": {
@@ -50,7 +50,6 @@
     "gulp-ruby-sass": "^2.0.6",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
-    "react-game-kit": "^1.0.6",
     "prop-types": "^15.5.10"
   }
 }
