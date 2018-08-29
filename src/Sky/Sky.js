@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { css } from 'emotion';
+import { cx, css } from 'emotion';
 
 const sky = css`
   width: inherit;
   height: inherit;
-  border: 1px solid red;
 `;
 
 const dayTime = css`
@@ -17,12 +16,11 @@ const nightTime = css`
 `;
 
 class Sky extends Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
-      visible: this.props.visible,
+      dayTime: this.props.dayTime,
     };
 
     // METHOD BINDINGS HERE
@@ -33,22 +31,20 @@ class Sky extends Component {
   // PRIVATE FUNCTIONS / EVENT HANDLERS HERE
 
   render() {
-    if (this.state.visible) {
-      return (
-        <div className={cx(sky,dayTime)}>
-          Sky bitches
-        </div>
-      );
-    } return null;
+    return (
+      <div
+        className={cx(sky, this.state.dayTime ? dayTime : nightTime)}
+      />
+    );
   }
 }
 
 Sky.defaultProps = {
-  visible: false,
+  dayTime: true,
 };
 
 Sky.propTypes = {
-  visible: PropTypes.bool,
+  dayTime: PropTypes.bool, // TODO: pass in "the time" and let sky.js decide on status re: day/night
 };
 
 export default Sky;
