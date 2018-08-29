@@ -1,5 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { css } from 'emotion';
+
+const sky = css`
+  width: inherit;
+  height: inherit;
+  border: 1px solid red;
+`;
+
+const dayTime = css`
+  background-color: skyblue;
+`;
+
+const nightTime = css`
+  background-color: indigo;
+`;
 
 class Sky extends Component {
 
@@ -7,7 +22,7 @@ class Sky extends Component {
     super(props);
 
     this.state = {
-      // STATE STUFF
+      visible: this.props.visible,
     };
 
     // METHOD BINDINGS HERE
@@ -18,16 +33,22 @@ class Sky extends Component {
   // PRIVATE FUNCTIONS / EVENT HANDLERS HERE
 
   render() {
-    // SKY RENDER STUFF
+    if (this.state.visible) {
+      return (
+        <div className={cx(sky,dayTime)}>
+          Sky bitches
+        </div>
+      );
+    } return null;
   }
 }
 
 Sky.defaultProps = {
-  //
+  visible: false,
 };
 
 Sky.propTypes = {
-  //
+  visible: PropTypes.bool,
 };
 
 export default Sky;
