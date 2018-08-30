@@ -7,4 +7,7 @@ import Player from './Player';
 storiesOf('Player', module)
   .add('Default Player', () => (
     <Player />
+  ))
+  .add('Player Health Zero', () => (
+    <Player health={0} />
   ));
