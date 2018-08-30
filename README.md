@@ -42,5 +42,5 @@ npm test
 To run one test file, use:
 
 ````
-npm test my-component.test.jsx
+npm test my-component.test.js
 ````
