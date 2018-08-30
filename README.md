@@ -21,7 +21,13 @@ Change the port number from 8080 to any other valid port number.
 
 ### The Stack
 
-This project uses React, with [Emotion](https://emotion.sh/) for styling. Storybook is used to test and debug individual UI components. Start storybook with `npm run storybook`. This project is set up to run storybook on port 9001; [it's over 9000!!!](http://localhost:9001).
+This project uses React, with [Emotion](https://emotion.sh/) for styling. Storybook is used to test and debug individual UI components. Start storybook with:
+
+````
+npm run storybook
+````
+
+This project is set up to run storybook on port 9001, because [it's over 9000!!!](http://localhost:9001)
 
 ### Unit Testing
 
