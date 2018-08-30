@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { cx, css } from 'emotion';
 
+// TODO: Seasons, weather, time calculations
+
 const sky = css`
   width: inherit;
   height: inherit;

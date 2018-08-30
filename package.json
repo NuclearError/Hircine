@@ -53,10 +53,6 @@
   "dependencies": {
     "babel-preset-stage-1": "^6.1.18",
     "emotion": "^9.2.8",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^5.0.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-ruby-sass": "^2.0.6",
     "prop-types": "^15.5.10",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
