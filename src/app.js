@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 
-import Sky from './Sky';
-import Player from './Player';
+import Sky from './components/Sky';
+import Player from './components/Player';
 
 // TODO either write as a functional component
 // or find a reason to keep it as a class
