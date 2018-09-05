@@ -12,13 +12,8 @@ const Container = styled.div`
 `;
 
 storiesOf('Sky', module)
-  .add('Default day', () => (
-    <Container>
-      <Sky dayTime />
-    </Container>
-  ))
-  .add('Default night', () => (
-    <Container>
-      <Sky dayTime={false} />
-    </Container>
-  ));
+  .addDecorator(story => <Container>{story()}</Container>)
+  .add('Default day', () =>
+    <Sky dayTime />)
+  .add('Default night', () =>
+    <Sky dayTime={false} />);
