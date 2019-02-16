@@ -29,8 +29,7 @@ const statBox = css`
 // it's up to you; if something is genuinely local to a component and nothing else will care, then it saves boilerplate to keep it local
 const penaltyModifier = 20;
 
-// TODO: rename to statbox
-class Player extends Component {
+class StatBox extends Component {
   constructor(props) {
     super(props);
 
@@ -77,7 +76,7 @@ class Player extends Component {
 // of the game don't permit negative HP
 
 // no default values for health/spirit; that's what the initialState is for
-Player.defaultProps = {
+StatBox.defaultProps = {
   hydration: 80,
   nourishment: 80,
   energy: 100,
@@ -86,7 +85,7 @@ Player.defaultProps = {
 
 // generally everything that's in Redux should be .isRequired, because either it's in Redux or it's
 // not, and your code should know which
-Player.propTypes = {
+StatBox.propTypes = {
   health: PropTypes.number.isRequired,
   hydration: PropTypes.number,
   nourishment: PropTypes.number,
@@ -100,7 +99,7 @@ Player.propTypes = {
 // This func receives the ENTIRE global state, and outputs an object that is passed to your
 // component as props
 const mapStateToProps = state => ({
-  health: state.stats.health, // global state { stats: { health: ... } }, <Player health={...} />
+  health: state.stats.health, // global state { stats: { health: ... } }, <StatBox health={...} />
   spirit: state.stats.spirit,
   // if you really wanna do what you've written then I'd say it's a computed value from the state, that only this component needs, so it goes HERE
   zeroHealth: state.stats.health <= 0,
@@ -110,7 +109,7 @@ const mapStateToProps = state => ({
   // what you've written here is a component which takes both a health prop and a zeroHealth prop
   // putting Redux aside, that's weird to me just from a React perspective
   // and when you get to testing components, what you'll often do is avoid Redux faffing by
-  // exporting the unwrapped Player itself as well? and testing that. That helps give a distinction
+  // exporting the unwrapped StatBox itself as well? and testing that. That helps give a distinction
   // between things that you're doing to translate Redux to your comp, vs things your comp does.
   // Imo this is the latter (and as a general rule you want to do as little as possible in mapState)
 });
@@ -132,4 +131,4 @@ const mapDispatchToProps = dispatch => ({
 // component to use
 // then connect returns a function that you call on your component to wrap it (so it gets all the
 // Redux stuff we just mapped)
-export default connect(mapStateToProps, mapDispatchToProps)(Player);
+export default connect(mapStateToProps, mapDispatchToProps)(StatBox);

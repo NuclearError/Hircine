@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import rootReducer from './reducers';
 
 import Sky from './components/Sky';
-import Player from './components/Player'; // TODO: rename to 'statbox'
+import StatBox from './components/StatBox';
 
 // TODO: consider moving the Provider + store out even further to index rather than app.
 const store = createStore(rootReducer);
@@ -19,7 +19,7 @@ export default class App extends Component {
         <div>
           <h1>Hello World Hircine</h1>
           <Sky dayTime />
-          <Player />
+          <StatBox />
         </div>
       </Provider>
     );

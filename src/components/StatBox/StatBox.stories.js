@@ -6,10 +6,10 @@ import { Provider } from 'react-redux';
 
 import { createStore } from '../../reducers';
 
-import Player from './Player';
+import StatBox from './StatBox';
 
-storiesOf('Player', module)
+storiesOf('StatBox', module)
   .addDecorator(story => <Provider store={createStore()}>{story()}</Provider>)
-  .add('Default Player', () => (
-    <Player />
+  .add('Default StatBox', () => (
+    <StatBox />
   ));
