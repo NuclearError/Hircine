@@ -19,7 +19,7 @@ const StatText = css`
 `;
 
 // this is a classname, not a styled component :) so you can't do the props thing you have
-// you either make it styled.section, or you move this inside the render method (and it's just ${props.zeroHealt })
+// you either make it styled.section, or you move this inside the render method (and it's just ${props.zeroHealth })
 const statBox = css`
   border: 2px solid;
   padding: 15px;
