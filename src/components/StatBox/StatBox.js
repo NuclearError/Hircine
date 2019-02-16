@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import { takeDamage } from '../../actions/combat';
 
+import StatDisplay from './StatDisplay';
+
 const StatText = css`
   margin: 0;
   padding: 5px 15px;
@@ -53,8 +55,6 @@ class StatBox extends Component {
   }
 
   render() {
-    // health and spirit (aka the two I moved into Redux) are .props not .state now!
-    // because to our *component* they're props, since Redux manages the state (and passes them in)
     return (
       <section className={cx(statBox, css`border-color: ${this.props.zeroHealth ? 'red' : 'black'}`)}>
         <h3 className={StatText}>Health: {this.props.health}</h3>
@@ -63,6 +63,7 @@ class StatBox extends Component {
         <h3 className={StatText}>Energy: {this.props.energy}</h3>
         <h3 className={StatText}>Comfort: {this.props.comfort}</h3>
         <h3 className={StatText}>Spirit: {this.props.spirit}</h3>
+        <StatDisplay statType="nourishment" statValue={this.props.nourishment} />
         { this.props.zeroHealth ? null : <button onClick={this.buttonClickHandler}>KILLIT</button> }
       </section>
     );
