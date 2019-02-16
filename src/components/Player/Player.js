@@ -3,11 +3,6 @@ import PropTypes from 'prop-types';
 import { css, cx } from 'emotion';
 import { connect } from 'react-redux';
 
-// so far everything we've done is just some random JS functions that happen to talk about the same
-// string (TAKE_DAMAGE)
-// redux doesn't know about them, our app doesn't use them
-// so Player is where we make the app use them
-
 import { takeDamage } from '../../actions/combat';
 
 const StatText = css`
@@ -34,6 +29,7 @@ const statBox = css`
 // it's up to you; if something is genuinely local to a component and nothing else will care, then it saves boilerplate to keep it local
 const penaltyModifier = 20;
 
+// TODO: rename to statbox
 class Player extends Component {
   constructor(props) {
     super(props);
