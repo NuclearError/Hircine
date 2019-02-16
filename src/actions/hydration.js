@@ -13,5 +13,3 @@ export const hydrate = amount => ({
 
 export const drinkWater = () => hydrate(10);
 export const drinkWine = () => hydrate(3);
-
-// export const healDamage = amount => takeDamage(-amount); // technically works but is a bit weird

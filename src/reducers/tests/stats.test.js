@@ -1,3 +1,4 @@
+import { tick } from '../../actions/tick';
 import { takeDamage, healDamage } from '../../actions/combat';
 import { hydrate, dehydrate } from '../../actions/hydration';
 import initialPlayerStats from '../initialPlayerStats';
@@ -5,9 +6,27 @@ import initialPlayerStats from '../initialPlayerStats';
 import reduce from '../stats';
 
 describe('the stats reducer: ', () => {
-  // ignore this rn
   it('should handle initial state', () => {
     expect(reduce(undefined, {})).toEqual(initialPlayerStats);
+  });
+
+  describe(' tick: ', () => {
+    it('lowers hydration, nourishment, and energy, over a fixed length of time', () => {
+      const initialState = {
+        health: 100,
+        hydration: 100,
+        nourishment: 100,
+        energy: 100,
+      };
+      const finalState = reduce(initialState, tick());
+      const expectedState = {
+        health: 100,
+        hydration: 99,
+        nourishment: 99,
+        energy: 99,
+      };
+      expect(finalState).toEqual(expectedState);
+    });
   });
 
   describe(' health: ', () => {
