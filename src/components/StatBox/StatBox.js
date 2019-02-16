@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import { takeDamage } from '../../actions/combat';
 import { bleedOut } from '../../actions/bleeding';
+import { tick } from '../../actions/tick';
 
 import StatDisplay from './StatDisplay';
 
@@ -46,6 +47,7 @@ class StatBox extends Component {
     this.state = {};
 
     this.buttonClickHandler = this.buttonClickHandler.bind(this);
+    this.tickHandler = this.tickHandler.bind(this);
   }
 
   // REACT LIFE CYCLE METHODS HERE
@@ -54,6 +56,10 @@ class StatBox extends Component {
   buttonClickHandler() {
     this.props.takeDamage(5);
     this.props.bleedOut(10);
+  }
+
+  tickHandler() {
+    this.props.tick();
   }
 
   render() {
@@ -67,6 +73,7 @@ class StatBox extends Component {
         <h3 className={StatText}>Spirit: {this.props.spirit}</h3>
         <StatDisplay statType="nourishment" statValue={this.props.nourishment} />
         { this.props.zeroHealth ? null : <button onClick={this.buttonClickHandler}>KILLIT</button> }
+        <button onClick={this.tickHandler}>TICK</button>
       </section>
     );
   }
@@ -94,6 +101,8 @@ StatBox.propTypes = {
   spirit: PropTypes.number.isRequired,
   takeDamage: PropTypes.func.isRequired,
   zeroHealth: PropTypes.bool.isRequired,
+  bleedOut: PropTypes.func.isRequired,
+  tick: PropTypes.func.isRequired,
 };
 
 // This func receives the ENTIRE global state, and outputs an object that is passed to your
@@ -127,6 +136,7 @@ const mapDispatchToProps = dispatch => ({
   takeDamage: amount => dispatch(takeDamage(amount)),
   // ^ prop name in component       ^ action creator
   bleedOut: amount => dispatch(bleedOut(amount)),
+  tick: () => dispatch(tick()),
 });
 
 // the way Redux actually gives state to your component (and allows it to fire actions) is `connect`
