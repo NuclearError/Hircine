@@ -4,6 +4,7 @@ import { css, cx } from 'emotion';
 import { connect } from 'react-redux';
 
 import { takeDamage } from '../../actions/combat';
+import { bleedOut } from '../../actions/bleeding';
 
 import StatDisplay from './StatDisplay';
 
@@ -51,7 +52,8 @@ class StatBox extends Component {
 
   // PRIVATE FUNCTIONS / EVENT HANDLERS HERE
   buttonClickHandler() {
-    this.props.takeDamage(25);
+    this.props.takeDamage(5);
+    this.props.bleedOut(10);
   }
 
   render() {
@@ -124,6 +126,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   takeDamage: amount => dispatch(takeDamage(amount)),
   // ^ prop name in component       ^ action creator
+  bleedOut: amount => dispatch(bleedOut(amount)),
 });
 
 // the way Redux actually gives state to your component (and allows it to fire actions) is `connect`
