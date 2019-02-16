@@ -1,6 +1,8 @@
 import { TAKE_DAMAGE, HEAL_DAMAGE } from '../actions/combat';
+import { HYDRATE, DEHYDRATE } from '../actions/hydration';
+import initialPlayerStats from './initialPlayerStats';
 
-const stats = (state = { health: 100, spirit: 0 }, action) => {
+const stats = (state = initialPlayerStats, action) => {
   switch (action.type) {
     case TAKE_DAMAGE:
       return {
@@ -12,6 +14,16 @@ const stats = (state = { health: 100, spirit: 0 }, action) => {
       return {
         ...state,
         health: state.health + action.amount,
+      };
+    case HYDRATE:
+      return {
+        ...state,
+        hydration: state.hydration + action.amount,
+      };
+    case DEHYDRATE:
+      return {
+        ...state,
+        hydration: state.hydration - action.amount,
       };
     default: return state;
   }

@@ -31,23 +31,16 @@ const statBox = css`
 
 
 // imo this should be in the reducers, not the actions
-// because you'll probably use it by saying something like "each tick, any stats that get penalised are lowered by this amount"
-// the "tick" would be the action, but the lowering would be something the reducer does in response to the tick action, imo?
-
-// a lot of Reduxy peeps just move everything to Redux state rather than think about it, ja.
-// it's up to you; if something is genuinely local to a component and nothing else will care, then it saves boilerplate to keep it local
-const penaltyModifier = 20;
+// because you'll probably use it by saying something like "each tick,
+// any stats that get penalised are lowered by this amount"
+// the "tick" would be the action, but the lowering would be something the reducer
+// does in response to the tick action, imo?
 
 class StatBox extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      hydration: this.props.hydration,
-      nourishment: this.props.nourishment,
-      energy: this.props.energy,
-      comfort: this.props.comfort,
-    };
+    this.state = {};
 
     this.buttonClickHandler = this.buttonClickHandler.bind(this);
   }
@@ -65,10 +58,10 @@ class StatBox extends Component {
     return (
       <section className={cx(statBox, css`border-color: ${this.props.zeroHealth ? 'red' : 'black'}`)}>
         <h3 className={StatText}>Health: {this.props.health}</h3>
-        <h3 className={StatText}>Hydration: {this.state.hydration}</h3>
-        <h3 className={StatText}>Nourishment: {this.state.nourishment}</h3>
-        <h3 className={StatText}>Energy: {this.state.energy}</h3>
-        <h3 className={StatText}>Comfort: {this.state.comfort}</h3>
+        <h3 className={StatText}>Hydration: {this.props.hydration}</h3>
+        <h3 className={StatText}>Nourishment: {this.props.nourishment}</h3>
+        <h3 className={StatText}>Energy: {this.props.energy}</h3>
+        <h3 className={StatText}>Comfort: {this.props.comfort}</h3>
         <h3 className={StatText}>Spirit: {this.props.spirit}</h3>
         { this.props.zeroHealth ? null : <button onClick={this.buttonClickHandler}>KILLIT</button> }
       </section>
@@ -84,22 +77,17 @@ class StatBox extends Component {
 // below zero) the latter means you keep throwing damage at the player all you like, but the rules
 // of the game don't permit negative HP
 
-// no default values for health/spirit; that's what the initialState is for
-StatBox.defaultProps = {
-  hydration: 80,
-  nourishment: 80,
-  energy: 100,
-  comfort: 40,
-};
+// no default values for individual stats; that's what the initialState is for
+StatBox.defaultProps = {};
 
 // generally everything that's in Redux should be .isRequired, because either it's in Redux or it's
 // not, and your code should know which
 StatBox.propTypes = {
   health: PropTypes.number.isRequired,
-  hydration: PropTypes.number,
-  nourishment: PropTypes.number,
-  energy: PropTypes.number,
-  comfort: PropTypes.number,
+  hydration: PropTypes.number.isRequired,
+  nourishment: PropTypes.number.isRequired,
+  energy: PropTypes.number.isRequired,
+  comfort: PropTypes.number.isRequired,
   spirit: PropTypes.number.isRequired,
   takeDamage: PropTypes.func.isRequired,
   zeroHealth: PropTypes.bool.isRequired,
@@ -109,8 +97,13 @@ StatBox.propTypes = {
 // component as props
 const mapStateToProps = state => ({
   health: state.stats.health, // global state { stats: { health: ... } }, <StatBox health={...} />
+  hydration: state.stats.hydration,
+  nourishment: state.stats.nourishment,
+  energy: state.stats.energy,
+  comfort: state.stats.comfort,
   spirit: state.stats.spirit,
-  // if you really wanna do what you've written then I'd say it's a computed value from the state, that only this component needs, so it goes HERE
+  // if you really wanna do what you've written then I'd say it's a computed value from the state,
+  // that only this component needs, so it goes HERE
   zeroHealth: state.stats.health <= 0,
   // but imo you don't even do that, you just use `health <= 0 ? blah` both are options, up to you
   // if it was more complex, I'd still just have const zeroHealth = health <= 0 in render()
