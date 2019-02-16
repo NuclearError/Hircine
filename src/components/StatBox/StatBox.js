@@ -6,11 +6,20 @@ import { connect } from 'react-redux';
 import { takeDamage } from '../../actions/combat';
 
 const StatText = css`
-  margin: 0 0 5px;
-  padding: 0;
+  margin: 0;
+  padding: 5px 15px;
   font-family: Baskerville,"Baskerville Old Face",Garamond,serif;
   font-weight: 300;
   font-size: 20px;
+  display: inline-block;
+  border: 1px solid #ccc;
+
+  &:nth-child(odd) {
+    background: #ddd;
+  }
+  &:nth-child(even) {
+    background: #efefef;
+  }
 `;
 
 // this is a classname, not a styled component :) so you can't do the props thing you have

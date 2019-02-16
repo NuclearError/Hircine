@@ -17,7 +17,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <div>
-          <h1>Hello World Hircine</h1>
+          <h1>Hircine</h1>
           <Sky dayTime />
           <StatBox />
         </div>

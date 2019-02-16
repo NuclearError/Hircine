@@ -5,8 +5,8 @@ import { cx, css } from 'emotion';
 // TODO: Seasons, weather, time calculations
 
 const sky = css`
-  width: inherit;
-  height: inherit;
+  width: 100%;
+  height: 200px;
 `;
 
 const dayTime = css`
