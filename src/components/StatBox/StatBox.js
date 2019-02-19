@@ -69,9 +69,9 @@ class StatBox extends Component {
     return (
       <section className={cx(statBox, css`border-color: ${this.props.zeroHealth ? 'red' : 'black'}`)}>
         <StatDisplay statType="health" statValue={this.props.health} />
+        <StatDisplay statType="energy" statValue={this.props.energy} />
         <StatDisplay statType="hydration" statValue={this.props.hydration} />
         <StatDisplay statType="nourishment" statValue={this.props.nourishment} />
-        <StatDisplay statType="energy" statValue={this.props.energy} />
         <StatDisplay statType="comfort" statValue={this.props.comfort} />
         <StatDisplay statType="spirit" statValue={this.props.spirit} />
         { this.props.zeroHealth ? null : <button onClick={this.buttonClickHandler}>KILLIT</button> }

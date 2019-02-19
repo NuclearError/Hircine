@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
+
+import theme from '../../theme';
 import Icon from './Icon';
 import Bar from './Bar';
 
 const DisplayBoxStyles = css`
-  padding: 5px 10px;
-  flex: 1;
+  padding: 5px;
   border: 1px solid #ccc;
   font-size: 0;
+  display: inline-block;
+  width: 50%;
 
   &:nth-child(odd) {
     background: #ddd;
@@ -16,38 +19,75 @@ const DisplayBoxStyles = css`
   &:nth-child(even) {
     background: #efefef;
   }
+
+  @media (min-width: ${theme.breakpoints.sm}px) {
+    width: 50%;
+  }
+
+  @media (min-width: ${theme.breakpoints.md}px) {
+    width: 33%;
+  }
+
+  @media (min-width: ${theme.breakpoints.xl}px) {
+    flex: 1;
+    width: auto;
+  }
+`;
+
+const ContainerStyles = css`
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
 `;
 
 const IconContainerStyles = css`
-  margin: 0 5px 0 0;
-  padding: 0;
-  display: inline-block;
+  ${ContainerStyles}
+  padding-right: 5px;
   font-size: 20px;
-  width: 32px;
-  height: 32px;
+  width: 20%;
+  float: left;
+
+  @media (min-width: ${theme.breakpoints.sm}px) {
+    width: 15%;
+  }
+
+  @media (min-width: ${theme.breakpoints.md}px) {
+    width: 20%;
+  }
+
+  @media (min-width: ${theme.breakpoints.xl}px) {
+    width: 25%;
+  }
 `;
 
-const StatText = css`
-  margin: 0;
-  padding: 0;
-  font-family: Baskerville,"Baskerville Old Face",Garamond,serif;
-  font-weight: 300;
-  font-size: 18px;
-  display: inline-block;
-  position: relative;
-  top: -2px;
+const BarContainerStyles = css`
+  ${ContainerStyles}
+  float: right;
+  text-align: center;
+  width: 80%;
+
+  @media (min-width: ${theme.breakpoints.sm}px) {
+    width: 85%;
+  }
+
+  @media (min-width: ${theme.breakpoints.md}px) {
+    width: 80%;
+  }
+
+  @media (min-width: ${theme.breakpoints.xl}px) {
+    width: 75%;
+  }
 `;
 
 const StatDisplay = ({ statType, statValue }) => (
   <div className={DisplayBoxStyles}>
     <div className={IconContainerStyles}>
-      <Icon type={statType}/>
+      <Icon type={statType} />
     </div>
-    <Bar value={statValue} />
-    <h3 className={StatText}>
-      {statValue}%
-    </h3>
-
+    <div className={BarContainerStyles}>
+      <Bar value={statValue} />
+    </div>
   </div>
 );
 
