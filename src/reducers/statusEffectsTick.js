@@ -12,7 +12,7 @@ const statusEffectsTick = (state, action) => {
     ...state,
     stats: {
       ...state.stats,
-      health: state.stats.health - isBleeding(state.statusEffects).amount,
+      health: Math.max(state.stats.health - isBleeding(state.statusEffects).amount, 0),
     },
   };
 };

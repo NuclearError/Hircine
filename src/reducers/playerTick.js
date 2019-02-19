@@ -8,9 +8,9 @@ const playerTick = (state, action) => {
     ...state,
     stats: {
       ...state.stats,
-      hydration: state.stats.hydration - 1,
-      nourishment: state.stats.nourishment - 1,
-      energy: state.stats.energy - 1,
+      hydration: Math.max(state.stats.hydration - 1, 0),
+      nourishment: Math.max(state.stats.nourishment - 1, 0),
+      energy: Math.max(state.stats.energy - 1, 0),
     },
   };
 };

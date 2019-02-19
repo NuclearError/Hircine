@@ -1,38 +1,30 @@
 import { TAKE_DAMAGE, HEAL_DAMAGE } from '../actions/combat';
 import { HYDRATE, DEHYDRATE } from '../actions/hydration';
-import { TICK } from '../actions/tick';
 import initialPlayerStats from './initialPlayerStats';
 
 // TODO update babel etc
 
 const stats = (state = initialPlayerStats, action) => {
   switch (action.type) {
-    case TICK:
-      return {
-        ...state,
-        hydration: state.hydration - 1,
-        nourishment: state.nourishment - 1,
-        energy: state.energy - 1,
-      };
     case TAKE_DAMAGE:
       return {
         ...state,
-        health: state.health - action.amount,
+        health: Math.max(state.health - action.amount, 0),
       };
     case HEAL_DAMAGE:
       return {
         ...state,
-        health: state.health + action.amount,
+        health: Math.max(state.health + action.amount, 100),
       };
     case HYDRATE:
       return {
         ...state,
-        hydration: state.hydration + action.amount,
+        hydration: Math.max(state.hydration + action.amount, 100),
       };
     case DEHYDRATE:
       return {
         ...state,
-        hydration: state.hydration - action.amount,
+        hydration: Math.max(state.hydration - action.amount, 0),
       };
     default: return state;
   }
