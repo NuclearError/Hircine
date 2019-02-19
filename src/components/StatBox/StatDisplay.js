@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css, cx } from 'emotion';
+import Icon from './Icon';
 
 const DisplayBoxStyles = css`
   padding: 5px 15px;
@@ -35,7 +36,7 @@ const StatText = css`
 const StatDisplay = ({ statType, statValue }) => (
   <div className={DisplayBoxStyles}>
     <div className={IconContainerStyles}>
-      {statType} :
+      <Icon type={statType}/>
     </div>
     <h3 className={StatText}>
       {statValue}
