@@ -6,7 +6,7 @@ import Bar from './Bar';
 
 const DisplayBoxStyles = css`
   padding: 5px 10px;
-  display: inline-block;
+  flex: 1;
   border: 1px solid #ccc;
   font-size: 0;
 

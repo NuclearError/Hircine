@@ -32,6 +32,8 @@ const StatText = css`
 const statBox = css`
   border: 2px solid;
   padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 
