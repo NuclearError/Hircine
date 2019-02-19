@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css, cx } from 'emotion';
 import Icon from './Icon';
+import Bar from './Bar';
 
 const DisplayBoxStyles = css`
-  padding: 5px 15px;
+  padding: 5px 10px;
   display: inline-block;
   border: 1px solid #ccc;
   font-size: 0;
@@ -18,10 +19,12 @@ const DisplayBoxStyles = css`
 `;
 
 const IconContainerStyles = css`
-  padding: 0 5px 0 0;
-  border: 1px solid blue;
+  margin: 0 5px 0 0;
+  padding: 0;
   display: inline-block;
   font-size: 20px;
+  width: 32px;
+  height: 32px;
 `;
 
 const StatText = css`
@@ -29,8 +32,10 @@ const StatText = css`
   padding: 0;
   font-family: Baskerville,"Baskerville Old Face",Garamond,serif;
   font-weight: 300;
-  font-size: 20px;
+  font-size: 18px;
   display: inline-block;
+  position: relative;
+  top: -2px;
 `;
 
 const StatDisplay = ({ statType, statValue }) => (
@@ -38,9 +43,11 @@ const StatDisplay = ({ statType, statValue }) => (
     <div className={IconContainerStyles}>
       <Icon type={statType}/>
     </div>
+    <Bar value={statValue} />
     <h3 className={StatText}>
-      {statValue}
+      {statValue}%
     </h3>
+
   </div>
 );
 

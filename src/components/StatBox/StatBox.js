@@ -66,13 +66,12 @@ class StatBox extends Component {
   render() {
     return (
       <section className={cx(statBox, css`border-color: ${this.props.zeroHealth ? 'red' : 'black'}`)}>
-        <h3 className={StatText}>Health: {this.props.health}</h3>
-        <h3 className={StatText}>Hydration: {this.props.hydration}</h3>
-        <h3 className={StatText}>Nourishment: {this.props.nourishment}</h3>
-        <h3 className={StatText}>Energy: {this.props.energy}</h3>
-        <h3 className={StatText}>Comfort: {this.props.comfort}</h3>
-        <h3 className={StatText}>Spirit: {this.props.spirit}</h3>
+        <StatDisplay statType="health" statValue={this.props.health} />
+        <StatDisplay statType="hydration" statValue={this.props.hydration} />
         <StatDisplay statType="nourishment" statValue={this.props.nourishment} />
+        <StatDisplay statType="energy" statValue={this.props.energy} />
+        <StatDisplay statType="comfort" statValue={this.props.comfort} />
+        <StatDisplay statType="spirit" statValue={this.props.spirit} />
         { this.props.zeroHealth ? null : <button onClick={this.buttonClickHandler}>KILLIT</button> }
         <button onClick={this.tickHandler}>TICK</button>
       </section>
