@@ -9,26 +9,6 @@ import { tick } from '../../actions/tick';
 
 import StatDisplay from './StatDisplay';
 
-const StatText = css`
-  margin: 0;
-  padding: 5px 15px;
-  font-family: Baskerville,"Baskerville Old Face",Garamond,serif;
-  font-weight: 300;
-  font-size: 20px;
-  display: inline-block;
-  border: 1px solid #ccc;
-
-  &:nth-child(odd) {
-    background: #ddd;
-  }
-  &:nth-child(even) {
-    background: #efefef;
-  }
-`;
-
-// this is a classname, not a styled component :) so you can't do the props thing you have
-// you either make it styled.section, or you move this inside the render method
-// (and it's just ${props.zeroHealth })
 const statBox = css`
   border: 2px solid;
   padding: 15px;
@@ -36,17 +16,11 @@ const statBox = css`
   flex-wrap: wrap;
 `;
 
-
-// imo this should be in the reducers, not the actions
-// because you'll probably use it by saying something like "each tick,
-// any stats that get penalised are lowered by this amount"
-// the "tick" would be the action, but the lowering would be something the reducer
-// does in response to the tick action, imo?
-
 class StatBox extends Component {
   constructor(props) {
     super(props);
 
+    // TODO: refactor as functional component if needed
     this.state = {};
 
     this.buttonClickHandler = this.buttonClickHandler.bind(this);
@@ -81,19 +55,9 @@ class StatBox extends Component {
   }
 }
 
-// the other conceptual distinction that Redux's abstractions give, which might be good for a game,
-// is about what's possible in your data itself? for negative health, it could be that your
-// components (UI logic) don't allow you to be hit when you're at zero (cuz ur ded already)
-// but if being below zero is *actually impossible* then you can enforce that by having the
-// reducer set health to Math.max(stat.stats.health - action.amount, 0) (i.e. not set a health
-// below zero) the latter means you keep throwing damage at the player all you like, but the rules
-// of the game don't permit negative HP
-
 // no default values for individual stats; that's what the initialState is for
 StatBox.defaultProps = {};
 
-// generally everything that's in Redux should be .isRequired, because either it's in Redux or it's
-// not, and your code should know which
 StatBox.propTypes = {
   health: PropTypes.number.isRequired,
   hydration: PropTypes.number.isRequired,
@@ -107,10 +71,10 @@ StatBox.propTypes = {
   tick: PropTypes.func.isRequired,
 };
 
-// This func receives the ENTIRE global state, and outputs an object that is passed to your
-// component as props
+// This func receives the ENTIRE global state,
+// and outputs an object that is passed to your component as props
 const mapStateToProps = state => ({
-  health: state.stats.health, // global state { stats: { health: ... } }, <StatBox health={...} />
+  health: state.stats.health,
   hydration: state.stats.hydration,
   nourishment: state.stats.nourishment,
   energy: state.stats.energy,

@@ -23,11 +23,9 @@ const DisplayBoxStyles = css`
   @media (min-width: ${theme.breakpoints.sm}px) {
     width: 50%;
   }
-
   @media (min-width: ${theme.breakpoints.md}px) {
     width: 33%;
   }
-
   @media (min-width: ${theme.breakpoints.xl}px) {
     flex: 1;
     width: auto;
@@ -47,15 +45,12 @@ const IconContainerStyles = css`
   font-size: 20px;
   width: 20%;
   float: left;
-
   @media (min-width: ${theme.breakpoints.sm}px) {
     width: 15%;
   }
-
   @media (min-width: ${theme.breakpoints.md}px) {
     width: 20%;
   }
-
   @media (min-width: ${theme.breakpoints.xl}px) {
     width: 25%;
   }
@@ -66,15 +61,12 @@ const BarContainerStyles = css`
   float: right;
   text-align: center;
   width: 80%;
-
   @media (min-width: ${theme.breakpoints.sm}px) {
     width: 85%;
   }
-
   @media (min-width: ${theme.breakpoints.md}px) {
     width: 80%;
   }
-
   @media (min-width: ${theme.breakpoints.xl}px) {
     width: 75%;
   }

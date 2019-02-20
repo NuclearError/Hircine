@@ -8,6 +8,7 @@ const statusEffects = (state = initialStatusEffects, action) => {
   switch (action.type) {
     case BLEED_OUT:
       // update the array of status effects to record the new effect
+      console.log("isBleeding: ", isBleeding);
       return isBleeding(state) ? state : [...state, action];
     default: return state;
   }
