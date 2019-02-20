@@ -5,9 +5,11 @@ import { connect } from 'react-redux';
 
 import { takeDamage } from '../../actions/combat';
 import { bleedOut } from '../../actions/bleeding';
+import { feelTired } from '../../actions/tired';
 import { tick } from '../../actions/tick';
 
 import StatDisplay from './StatDisplay';
+import EffectsDisplay from './EffectsDisplay';
 
 const statBox = css`
   border: 2px solid;
@@ -23,33 +25,50 @@ class StatBox extends Component {
     // TODO: refactor as functional component if needed
     this.state = {};
 
-    this.buttonClickHandler = this.buttonClickHandler.bind(this);
+    this.damageHandler = this.damageHandler.bind(this);
     this.tickHandler = this.tickHandler.bind(this);
+    this.bleedHandler = this.bleedHandler.bind(this);
+    this.tiredHandler = this.tiredHandler.bind(this);
   }
 
   // REACT LIFE CYCLE METHODS HERE
 
   // PRIVATE FUNCTIONS / EVENT HANDLERS HERE
-  buttonClickHandler() {
-    this.props.takeDamage(5);
-    this.props.bleedOut(10);
+  damageHandler() {
+    this.props.takeDamage(15);
   }
 
   tickHandler() {
     this.props.tick();
   }
 
+  bleedHandler() {
+    this.props.bleedOut(5);
+  }
+
+  tiredHandler() {
+    this.props.feelTired(10);
+  }
+
   render() {
     return (
       <section className={cx(statBox, css`border-color: ${this.props.zeroHealth ? 'red' : 'black'}`)}>
+        {
+          this.props.currentEffects.length
+          ? <EffectsDisplay currentEffects={this.props.currentEffects} />
+          : null
+        }
         <StatDisplay statType="health" statValue={this.props.health} />
         <StatDisplay statType="energy" statValue={this.props.energy} />
         <StatDisplay statType="hydration" statValue={this.props.hydration} />
         <StatDisplay statType="nourishment" statValue={this.props.nourishment} />
         <StatDisplay statType="comfort" statValue={this.props.comfort} />
         <StatDisplay statType="spirit" statValue={this.props.spirit} />
-        { this.props.zeroHealth ? null : <button onClick={this.buttonClickHandler}>KILLIT</button> }
+
         <button onClick={this.tickHandler}>TICK</button>
+        { this.props.zeroHealth ? null : <button onClick={this.damageHandler}>Take Damage</button> }
+        <button onClick={this.bleedHandler}>Apply Bleed</button>
+        <button onClick={this.tiredHandler}>Apply Tiredness</button>
       </section>
     );
   }
@@ -59,6 +78,7 @@ class StatBox extends Component {
 StatBox.defaultProps = {};
 
 StatBox.propTypes = {
+  currentEffects: PropTypes.array.isRequired,
   health: PropTypes.number.isRequired,
   hydration: PropTypes.number.isRequired,
   nourishment: PropTypes.number.isRequired,
@@ -68,12 +88,14 @@ StatBox.propTypes = {
   takeDamage: PropTypes.func.isRequired,
   zeroHealth: PropTypes.bool.isRequired,
   bleedOut: PropTypes.func.isRequired,
+  feelTired: PropTypes.func.isRequired,
   tick: PropTypes.func.isRequired,
 };
 
 // This func receives the ENTIRE global state,
 // and outputs an object that is passed to your component as props
 const mapStateToProps = state => ({
+  currentEffects: state.statusEffects,
   health: state.stats.health,
   hydration: state.stats.hydration,
   nourishment: state.stats.nourishment,
@@ -102,6 +124,7 @@ const mapDispatchToProps = dispatch => ({
   takeDamage: amount => dispatch(takeDamage(amount)),
   // ^ prop name in component       ^ action creator
   bleedOut: amount => dispatch(bleedOut(amount)),
+  feelTired: amount => dispatch(feelTired(amount)),
   tick: () => dispatch(tick()),
 });
 

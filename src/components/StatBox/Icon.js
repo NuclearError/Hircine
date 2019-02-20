@@ -16,7 +16,7 @@ const Icon = ({ type }) => {
   return (
     <picture title={`${type}`}>
       {/* <source srcSet={svgString} type="image/svg+xml" /> */}
-      <img className={imgStyles} src={pngString} alt={`Player ${type}`} />
+      <img className={imgStyles} src={pngString} alt={`${type}`} />
     </picture>
   );
 };
