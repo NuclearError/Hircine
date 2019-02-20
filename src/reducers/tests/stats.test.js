@@ -1,5 +1,5 @@
 import { tick } from '../../actions/tick';
-import { takeDamage, healDamage } from '../../actions/combat';
+import { takeDamage, healDamage } from '../../actions/health';
 import { hydrate, dehydrate } from '../../actions/hydration';
 import initialPlayerStats from '../initialPlayerStats';
 

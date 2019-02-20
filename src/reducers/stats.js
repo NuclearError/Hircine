@@ -1,4 +1,4 @@
-import { TAKE_DAMAGE, HEAL_DAMAGE } from '../actions/combat';
+import { TAKE_DAMAGE, HEAL_DAMAGE } from '../actions/health';
 import { HYDRATE, DEHYDRATE } from '../actions/hydration';
 import initialPlayerStats from './initialPlayerStats';
 

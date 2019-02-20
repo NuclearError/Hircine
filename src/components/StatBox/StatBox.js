@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { css, cx } from 'emotion';
 import { connect } from 'react-redux';
 
-import { takeDamage } from '../../actions/combat';
+import { takeDamage } from '../../actions/health';
 import { bleedOut } from '../../actions/bleeding';
 import { feelTired } from '../../actions/tired';
 import { tick } from '../../actions/tick';
