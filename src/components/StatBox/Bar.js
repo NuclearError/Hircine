@@ -44,7 +44,7 @@ const Bar = ({ value }) => (
   <React.Fragment>
     <progress className={BarStyles} max="100" value={value} />
     <h3 className={StatText}>
-      {value}%
+      {Math.round(value)}%
     </h3>
   </React.Fragment>
 );
