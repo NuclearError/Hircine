@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import rootReducer from './reducers';
 
 import Sky from './components/Sky';
-import GameTime from './components/GameTime';
+import GameTick from './components/GameTick';
 import StatBox from './components/StatBox';
 
 // TODO: consider moving the Provider + store out even further to index rather than app.
@@ -19,7 +19,7 @@ export default class App extends Component {
       <Provider store={store}>
         <div>
           <h1>Hircine</h1>
-          <GameTime />
+          <GameTick />
           <Sky dayTime />
           <StatBox />
         </div>

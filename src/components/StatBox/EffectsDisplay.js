@@ -28,7 +28,7 @@ const iconContainerStyles = css`
 const EffectsDisplay = ({ currentEffects }) => (
   <div className={containerStyles}>
     {currentEffects.map(effect =>
-      <div className={iconContainerStyles}><Icon type={effect.label} /></div>)
+      <div key={effect.label} className={iconContainerStyles}><Icon type={effect.label} /></div>)
     }
   </div>
 );

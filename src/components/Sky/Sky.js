@@ -6,7 +6,7 @@ import { cx, css } from 'emotion';
 
 const sky = css`
   width: 100%;
-  height: 200px;
+  height: 100px;
 `;
 
 const dayTime = css`
