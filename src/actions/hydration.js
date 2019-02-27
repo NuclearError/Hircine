@@ -11,5 +11,4 @@ export const hydrate = amount => ({
   amount,
 });
 
-export const drinkWater = () => hydrate(10);
-export const drinkWine = () => hydrate(3);
+export const drink = liquid => hydrate(liquid.hydration);
