@@ -4,6 +4,13 @@ import initialPlayerStats from './initialPlayerStats';
 
 // TODO update babel etc
 
+/*
+  High level action (e.g. "drink water") =>
+  actionToAdjustments (e.g. "drink => hydration up by
+  drink.value, bladderFullness up by drink.fullness") =>
+  apply all adjustments to stats
+*/
+
 const adjustmentsByType = {
   [TAKE_DAMAGE]: { stat: 'health', increase: false },
   [HEAL_DAMAGE]: { stat: 'health', increase: true },
