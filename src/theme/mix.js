@@ -1,27 +1,40 @@
 /*
-* Adapted from this:
-* https://gist.github.com/jedfoster/7939513
+  Written by @CheshireSwift
+  Original can be found here:
+  https://gist.github.com/CheshireSwift/d6728bc0e3e83c4c5a0db374f9d7e43b
 */
 
-const mix = (firstColor, secondColor, weight = 50) => {
-  function d2h(d) { return d.toString(16); } // convert a decimal value to hex
-  function h2d(h) { return parseInt(h, 16); } // convert a hex value to decimal
+// assert.equal(mix('#007fff', '#ff7f00'), '#7f7f7f');
+// assert.equal(mix('#ff0000', '#0000bb', 75), '#bf002e');
 
-  let color = '#';
+function weightedHexToTriplet(hex, percentage) {
+  const parseHexSubstring = (start, end) =>
+    parseInt(hex.substring(start, end), 16);
 
-  for (let i = 0; i <= 5; i += 2) { // loop through each of the 3 hex pairs—red, green, and blue
-    const v1 = h2d(firstColor.substr(i, 2)); // extract the current pairs
-    const v2 = h2d(secondColor.substr(i, 2));
+  const r = parseHexSubstring(1, 3);
+  const g = parseHexSubstring(3, 5);
+  const b = parseHexSubstring(5, 7);
+  return [r, g, b].map(x => (x * percentage) / 100);
+}
 
-    // combine the current pairs from each source color, according to the specified weight
-    let val = d2h(Math.floor((v2 + (v1 - v2)) * (weight / 100.0)));
+const halfAssedLeftPad = digitOrTwo =>
+  digitOrTwo.length < 2 ? '0' + digitOrTwo : digitOrTwo;
 
-    while (val.length < 2) { val = `0${val}`; } // prepend a '0' if val results in a single digit
+const mixedDigit = (aDigit, bDigit) =>
+  halfAssedLeftPad(Math.floor(aDigit + bDigit).toString(16));
 
-    color += val; // concatenate val to our new color string
-  }
+function mix(a, b, percentage = 50) {
+  const aTri = weightedHexToTriplet(a, percentage);
+  const bTri = weightedHexToTriplet(b, 100 - percentage);
 
-  return color; // PROFIT!
-};
+  return (
+    '#' +
+    [
+      mixedDigit(aTri[0], bTri[0]),
+      mixedDigit(aTri[1], bTri[1]),
+      mixedDigit(aTri[2], bTri[2])
+    ].join('')
+  );
+}
 
 export default mix;
