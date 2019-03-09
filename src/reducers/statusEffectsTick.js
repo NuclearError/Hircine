@@ -10,6 +10,11 @@ const adjustmentsByEffect = {
   [FEEL_TIRED]: { stat: 'energy', increase: false },
 };
 
+/*
+* Original stat manipulation, prior to refactoring, looked like this:
+* const isTired = effects => effects.find(effect => effect.type === FEEL_TIRED) || { amount: 0 };
+* energy: Math.max(state.stats.energy - isTired(state.statusEffects).amount, 0),
+*/
 function statsWithEffectUpdate(stats, effect) {
   const adjustment = adjustmentsByEffect[effect.type];
 
