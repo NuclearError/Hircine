@@ -3,11 +3,9 @@
 * https://gist.github.com/jedfoster/7939513
 */
 
-const mix = (firstColor, secondColor, weight) => {
+const mix = (firstColor, secondColor, weight = 50) => {
   function d2h(d) { return d.toString(16); } // convert a decimal value to hex
   function h2d(h) { return parseInt(h, 16); } // convert a hex value to decimal
-
-  weight = (typeof (weight) !== 'undefined') ? weight : 50; // set the weight to 50%, if that argument is omitted
 
   let color = '#';
 

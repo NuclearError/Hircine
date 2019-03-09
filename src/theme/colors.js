@@ -1,18 +1,30 @@
 import mix from './mix';
 
-export default {
-  brown: '#5c402e',
-  orange: '#e79f4b',
-  yellow: '#f7e198',
-  grey: '#a3bc9c',
-  teal: '#298e88',
-  navy: '#00495c',
-  black: '#171f2a',
+const brown = '#5c402e';
+const orange = '#e79f4b';
+const yellow = '#f7e198';
+const grey = '#a3bc9c';
+const teal = '#298e88';
+const navy = '#00495c';
+const black = '#171f2a';
 
-  baseBlack: this.black,
-  baseWhite: this.yellow,
+const baseBlack = black;
+const baseWhite = yellow;
 
-  paletteTest1: mix(this.baseWhite, this.teal, 60),
-  paletteTest2: mix(this.baseWhite, this.orange, 80),
-  paletteTest3: mix(this.baseBlack, this.orange),
+const colors = {
+  brown,
+  orange,
+  yellow,
+  grey,
+  teal,
+  navy,
+  black,
+  baseBlack,
+  baseWhite,
+
+  paletteTest1: mix(baseWhite, teal, 60),
+  paletteTest2: mix(baseWhite, orange, 80),
+  paletteTest3: mix(baseBlack, orange),
 };
+
+export default colors;
