@@ -1,48 +1,27 @@
 import { tick } from '../../actions/tick';
-import { bleedOut } from '../../actions/bleeding';
 
 import reduce from '../playerTick';
+import defaultStats from '../initialPlayerStats';
+
+const defaultStatsAfterSingleTick = {
+  ...defaultStats,
+  hydration: 79.9, // lowered by 0.1
+  nourishment: 79.9,
+  energy: 99.9,
+};
 
 describe('The player tick reducer, on each tick : ', () => {
   it('lowers hydration, nourishment, and energy', () => {
     const initialState = {
       stats: {
-        health: 100,
-        hydration: 100,
-        nourishment: 100,
-        energy: 100,
+        ...defaultStats,
       },
     };
     const finalState = reduce(initialState, tick());
     const expectedState = {
       stats: {
-        health: 100,
-        hydration: 99,
-        nourishment: 99,
-        energy: 99,
+        ...defaultStatsAfterSingleTick,
       },
-    };
-    expect(finalState).toEqual(expectedState);
-  });
-  it('lowers health if player has bleeding status effect', () => {
-    const initialState = {
-      stats: {
-        health: 100,
-        spirit: 100,
-      },
-      statusEffects: [
-        bleedOut(5),
-      ],
-    };
-    const finalState = reduce(initialState, tick());
-    const expectedState = {
-      stats: {
-        health: 95,
-        spirit: 100,
-      },
-      statusEffects: [
-        bleedOut(5),
-      ],
     };
     expect(finalState).toEqual(expectedState);
   });
