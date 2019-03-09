@@ -9,6 +9,7 @@ import rootReducer from './reducers';
 import Sky from './components/Sky';
 import GameTick from './components/GameTick';
 import StatBox from './components/StatBox';
+import GameDateTime from './components/GameDateTime';
 
 // TODO: consider moving the Provider + store out even further to index rather than app.
 const store = createStore(rootReducer);
@@ -20,6 +21,7 @@ export default class App extends Component {
         <div>
           <h1>Hircine</h1>
           <GameTick />
+          <GameDateTime />
           <Sky dayTime />
           <StatBox />
         </div>

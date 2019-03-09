@@ -4,6 +4,7 @@
   https://gist.github.com/CheshireSwift/d6728bc0e3e83c4c5a0db374f9d7e43b
 */
 
+// Usage:
 // assert.equal(mix('#007fff', '#ff7f00'), '#7f7f7f');
 // assert.equal(mix('#ff0000', '#0000bb', 75), '#bf002e');
 

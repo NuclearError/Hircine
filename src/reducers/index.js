@@ -4,10 +4,12 @@ import stats from './stats';
 import statusEffects from './statusEffects';
 import playerTick from './playerTick';
 import statusEffectsTick from './statusEffectsTick';
+import time from './time';
 
 const rootReducer = reduceReducers(Redux.combineReducers({
   stats,
   statusEffects,
+  time,
 }), playerTick, statusEffectsTick);
 
 // Using a reusable createStore function here so that it can be used in both app.js and storybook
