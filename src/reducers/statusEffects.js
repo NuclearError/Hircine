@@ -2,10 +2,10 @@ import { BLEED_OUT } from '../actions/bleeding';
 import { FEEL_TIRED } from '../actions/tired';
 
 const singleStackEffects = [BLEED_OUT, FEEL_TIRED];
-const isSingleStackEffect = singleStackEffects.includes;
+const isSingleStackEffect = effect => singleStackEffects.includes(effect);
 
 const multiStackEffects = [];
-const isMultiStackEffect = multiStackEffects.includes;
+const isMultiStackEffect = effect => multiStackEffects.includes(effect);
 
 const initialStatusEffects = [];
 
