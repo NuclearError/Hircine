@@ -65,8 +65,6 @@ class StatBox extends Component {
         <StatDisplay statType="comfort" statValue={this.props.comfort} />
         <StatDisplay statType="spirit" statValue={this.props.spirit} />
 
-        <button onClick={this.tickHandler}>TICK</button>
-        { this.props.zeroHealth ? null : <button onClick={this.damageHandler}>Take Damage</button> }
         <button onClick={this.bleedHandler}>Apply Bleed</button>
         <button onClick={this.tiredHandler}>Apply Tiredness</button>
       </section>
