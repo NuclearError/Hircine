@@ -2,21 +2,35 @@ import { TICK } from '../actions/tick';
 import { BLEED_OUT } from '../actions/bleeding';
 import { FEEL_TIRED } from '../actions/tired';
 
-// This came from the status effects file. TODO: abstract this somewhere else
-const isBleeding = effects => effects.find(effect => effect.type === BLEED_OUT) || { amount: 0 };
-const isTired = effects => effects.find(effect => effect.type === FEEL_TIRED) || { amount: 0 };
+// TODO: duped from stats
+const clamp = value => Math.max(Math.min(value, 100), 0);
+
+const adjustmentsByEffect = {
+  [BLEED_OUT]: { stat: 'health', increase: false },
+  [FEEL_TIRED]: { stat: 'energy', increase: false },
+};
+
+function statsWithEffectUpdate(stats, effect) {
+  const adjustment = adjustmentsByEffect[effect.type];
+
+  // Skip effects that aren't simple stat adjustment
+  if (!adjustment) {
+    return stats;
+  }
+
+  const amount = adjustment.increase ? effect.amount : -effect.amount;
+  const updatedValue = clamp(stats[adjustment.stat] + amount);
+  return { ...stats, [adjustment.stat]: updatedValue };
+}
 
 const statusEffectsTick = (state, action) => {
   if (action.type !== TICK) {
     return state;
   }
+
   return {
     ...state,
-    stats: {
-      ...state.stats,
-      health: Math.max(state.stats.health - isBleeding(state.statusEffects).amount, 0),
-      energy: Math.max(state.stats.energy - isTired(state.statusEffects).amount, 0),
-    },
+    stats: state.statusEffects.reduce(statsWithEffectUpdate, state.stats),
   };
 };
 

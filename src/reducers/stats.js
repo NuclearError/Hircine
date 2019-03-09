@@ -4,30 +4,28 @@ import initialPlayerStats from './initialPlayerStats';
 
 // TODO update babel etc
 
+const adjustmentsByType = {
+  [TAKE_DAMAGE]: { stat: 'health', increase: false },
+  [HEAL_DAMAGE]: { stat: 'health', increase: true },
+  [HYDRATE]: { stat: 'hydration', increase: true },
+  [DEHYDRATE]: { stat: 'hydration', increase: false },
+};
+
+const clamp = value => Math.max(Math.min(value, 100), 0);
+
 const stats = (state = initialPlayerStats, action) => {
-  switch (action.type) {
-    case TAKE_DAMAGE:
-      return {
-        ...state,
-        health: Math.max(state.health - action.amount, 0),
-      };
-    case HEAL_DAMAGE:
-      return {
-        ...state,
-        health: Math.max(state.health + action.amount, 100),
-      };
-    case HYDRATE:
-      return {
-        ...state,
-        hydration: Math.max(state.hydration + action.amount, 100),
-      };
-    case DEHYDRATE:
-      return {
-        ...state,
-        hydration: Math.max(state.hydration - action.amount, 0),
-      };
-    default: return state;
+  const adjustment = adjustmentsByType[action.type];
+  if (!adjustment) {
+    return state;
   }
+
+  const oldValue = state[adjustment.stat];
+  const change = adjustment.increase ? action.amount : -action.amount;
+
+  return {
+    ...state,
+    [adjustment.stat]: clamp(oldValue + change),
+  };
 };
 
 export default stats;

@@ -10,12 +10,19 @@ class GameTick extends Component {
     this.tickHandler = this.tickHandler.bind(this);
   }
 
+  componentDidMount() {
+    this.intervalId = setInterval(this.tickHandler, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
+  }
+
   tickHandler() {
     this.props.tick();
   }
 
   render() {
-    setInterval(this.tickHandler, 1000);
     return null;
   }
 }
@@ -24,7 +31,7 @@ GameTick.propTypes = {
   tick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
   tick: () => dispatch(tick()),
