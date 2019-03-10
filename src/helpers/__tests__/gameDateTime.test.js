@@ -1,10 +1,9 @@
-import { ticksInMinute, minutesInHour, hoursInDay, daysInWeek, minutes, hours, days } from './gameDateTime';
+import { ticksInMinute, minutesInHour, hoursInDay, daysInWeek, minutes, hours, days } from '../gameDateTime';
 
 describe('Game date time', () => {
   it('counts up minutes from ticks', () => {
     expect(minutes(ticksInMinute - 1)).toBe(0);
     expect(minutes(ticksInMinute)).toBe(1);
-    expect(minutes(ticksInMinute + 1)).toBe(1);
   });
 
   it('rolls over minutes into hours', () => {
