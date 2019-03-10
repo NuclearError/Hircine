@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 
 import { takeDamage } from '../../actions/health';
 import { bleedOut } from '../../actions/bleeding';
-import { feelTired } from '../../actions/tired';
+import { feelTired, feelWired } from '../../actions/tired';
+import { beStarving, feelWellfed } from '../../actions/starving';
 import { tick } from '../../actions/tick';
 
 import StatDisplay from './StatDisplay';
@@ -29,6 +30,7 @@ class StatBox extends Component {
     this.tickHandler = this.tickHandler.bind(this);
     this.bleedHandler = this.bleedHandler.bind(this);
     this.tiredHandler = this.tiredHandler.bind(this);
+    this.hungerHandler = this.hungerHandler.bind(this);
   }
 
   // REACT LIFE CYCLE METHODS HERE
@@ -50,6 +52,10 @@ class StatBox extends Component {
     this.props.feelTired(10);
   }
 
+  hungerHandler() {
+    this.props.beStarving(10);
+  }
+
   render() {
     return (
       <section className={cx(statBox, css`border-color: ${this.props.zeroHealth ? 'red' : 'black'}`)}>
@@ -67,6 +73,7 @@ class StatBox extends Component {
 
         <button onClick={this.bleedHandler}>Apply Bleed</button>
         <button onClick={this.tiredHandler}>Apply Tiredness</button>
+        <button onClick={this.hungerHandler}>Apply Hunger</button>
       </section>
     );
   }
@@ -87,6 +94,9 @@ StatBox.propTypes = {
   zeroHealth: PropTypes.bool.isRequired,
   bleedOut: PropTypes.func.isRequired,
   feelTired: PropTypes.func.isRequired,
+  feelWired: PropTypes.func.isRequired,
+  beStarving: PropTypes.func.isRequired,
+  feelWellfed: PropTypes.func.isRequired,
   tick: PropTypes.func.isRequired,
 };
 
@@ -123,6 +133,9 @@ const mapDispatchToProps = dispatch => ({
   // ^ prop name in component       ^ action creator
   bleedOut: amount => dispatch(bleedOut(amount)),
   feelTired: amount => dispatch(feelTired(amount)),
+  feelWired: amount => dispatch(feelWired(amount)),
+  beStarving: amount => dispatch(beStarving(amount)),
+  feelWellfed: amount => dispatch(feelWellfed(amount)),
   tick: () => dispatch(tick()),
 });
 

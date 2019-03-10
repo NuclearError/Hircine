@@ -1,5 +1,6 @@
 import { TAKE_DAMAGE, HEAL_DAMAGE } from '../actions/health';
 import { HYDRATE, DEHYDRATE } from '../actions/hydration';
+import { GAIN_HUNGER, LOSE_HUNGER } from '../actions/nourishment';
 import initialPlayerStats from './initialPlayerStats';
 
 /*
@@ -14,6 +15,8 @@ const adjustmentsByType = {
   [HEAL_DAMAGE]: { stat: 'health', increase: true },
   [HYDRATE]: { stat: 'hydration', increase: true },
   [DEHYDRATE]: { stat: 'hydration', increase: false },
+  [GAIN_HUNGER]: { stat: 'nourishment', increase: false },
+  [LOSE_HUNGER]: { stat: 'nourishment', increase: true },
 };
 
 const clamp = value => Math.max(Math.min(value, 100), 0);

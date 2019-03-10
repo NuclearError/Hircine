@@ -1,7 +1,14 @@
 import { BLEED_OUT } from '../actions/bleeding';
 import { FEEL_TIRED, FEEL_WIRED } from '../actions/tired';
+import { BE_STARVING, FEEL_WELLFED } from '../actions/starving';
 
-const singleStackEffects = [BLEED_OUT, FEEL_TIRED, FEEL_WIRED];
+const singleStackEffects = [
+  BLEED_OUT,
+  FEEL_TIRED,
+  FEEL_WIRED,
+  BE_STARVING,
+  FEEL_WELLFED,
+];
 const isSingleStackEffect = effect => singleStackEffects.includes(effect);
 
 const multiStackEffects = [];

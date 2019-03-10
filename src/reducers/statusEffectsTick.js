@@ -1,6 +1,7 @@
 import { TICK } from '../actions/tick';
 import { BLEED_OUT } from '../actions/bleeding';
 import { FEEL_TIRED, FEEL_WIRED } from '../actions/tired';
+import { BE_STARVING, FEEL_WELLFED } from '../actions/starving';
 
 // TODO: duped from stats
 const clamp = value => Math.max(Math.min(value, 100), 0);
@@ -9,6 +10,8 @@ const adjustmentsByEffect = {
   [BLEED_OUT]: { stat: 'health', increase: false },
   [FEEL_TIRED]: { stat: 'energy', increase: false },
   [FEEL_WIRED]: { stat: 'energy', increase: true },
+  [BE_STARVING]: { stat: 'nourishment', increase: false },
+  [FEEL_WELLFED]: { stat: 'nourishment', increase: true },
 };
 
 /*
