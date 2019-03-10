@@ -1,4 +1,32 @@
-export const initialYear = 1888;
+export const initialYear = 1865;
+export const initialDay = 12;
+export const initialWeekday = 'Wounsday';
+export const initialMonth = 'Snowbells';
+
+export const weekdayNames = [
+  'Moonday',
+  'Wounsday',
+  'Marketday',
+  'Stormday',
+  'Hearthday',
+  'Loreday',
+  'Sunday',
+];
+
+export const monthNames = [
+  'Midwinter', // January
+  'Snowbells', // February
+  'Harshwind', // March
+  'Lambing Moon', // April
+  'Sunwarming', // May
+  'Hopelight', // June
+  'Midsummer', // July
+  'Marshlight', // August
+  'Harvest Moon', // September
+  'All Hallows', // October
+  'Eventide', // November
+  'Winterdark', // December
+];
 
 export const ticksInMinute = 1;
 export const minutesInHour = 60;
@@ -47,3 +75,5 @@ const ticksTo = unit => ticks =>
 export const minutes = ticksTo(timeUnit.minute);
 export const hours = ticksTo(timeUnit.hour);
 export const days = ticksTo(timeUnit.day);
+export const weeks = ticksTo(timeUnit.week);
+export const months = ticksTo(timeUnit.month);

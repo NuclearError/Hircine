@@ -1,5 +1,5 @@
 import { TICK } from '../actions/tick';
-import { initialYear, ticksInYear } from '../helpers/gameDateTime'
+import { initialYear, ticksInYear } from '../helpers/gameDateTime';
 
 const initialState = {
   ticks: 0,

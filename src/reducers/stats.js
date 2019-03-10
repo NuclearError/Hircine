@@ -2,8 +2,6 @@ import { TAKE_DAMAGE, HEAL_DAMAGE } from '../actions/health';
 import { HYDRATE, DEHYDRATE } from '../actions/hydration';
 import initialPlayerStats from './initialPlayerStats';
 
-// TODO update babel etc
-
 /*
   High level action (e.g. "drink water") =>
   actionToAdjustments (e.g. "drink => hydration up by

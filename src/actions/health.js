@@ -11,7 +11,9 @@ export const healDamage = amount => ({
   amount,
 });
 
+/*
+- Examples of how you might expand upon this
 export const rabbitAttack = () => takeDamage(1);
 export const bearAttack = isGrizzly => takeDamage(isGrizzly ? 5 : 2);
-
-// export const healDamage = amount => takeDamage(-amount); // technically works but is a bit weird
+export const healDamage = amount => takeDamage(-amount); // technically works but is a bit weird
+*/
