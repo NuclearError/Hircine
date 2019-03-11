@@ -5,7 +5,7 @@ describe('Tiredness actions', () => {
     it('outputs an action with a tiredness value', () => {
       expect(feelTired(12)).toEqual({
         type: FEEL_TIRED,
-        label: 'tired',
+        label: 'exhausted',
         amount: 12,
       });
     });

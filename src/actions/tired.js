@@ -3,7 +3,7 @@ export const FEEL_WIRED = 'FEEL_WIRED';
 
 export const feelTired = amount => ({
   type: FEEL_TIRED,
-  label: 'tired',
+  label: 'exhausted',
   amount,
 });
 

@@ -4,6 +4,7 @@ import { css, cx } from 'emotion';
 import { connect } from 'react-redux';
 
 import { takeDamage } from '../../actions/health';
+import { eat } from '../../actions/nourishment';
 import { bleedOut } from '../../actions/bleeding';
 import { feelTired, feelWired } from '../../actions/tired';
 import { beStarving, feelWellfed } from '../../actions/starving';
@@ -26,16 +27,20 @@ class StatBox extends Component {
     // TODO: refactor as functional component if needed
     this.state = {};
 
+    /*
     this.damageHandler = this.damageHandler.bind(this);
     this.tickHandler = this.tickHandler.bind(this);
     this.bleedHandler = this.bleedHandler.bind(this);
     this.tiredHandler = this.tiredHandler.bind(this);
+    */
     this.hungerHandler = this.hungerHandler.bind(this);
+    this.eatHandler = this.eatHandler.bind(this);
   }
 
   // REACT LIFE CYCLE METHODS HERE
 
   // PRIVATE FUNCTIONS / EVENT HANDLERS HERE
+  /*
   damageHandler() {
     this.props.takeDamage(15);
   }
@@ -51,9 +56,14 @@ class StatBox extends Component {
   tiredHandler() {
     this.props.feelTired(10);
   }
-
+  */
   hungerHandler() {
-    this.props.beStarving(10);
+    this.props.beStarving(2);
+  }
+
+  eatHandler() {
+    const food = { nourishment: 10 };
+    this.props.eat(food);
   }
 
   render() {
@@ -70,10 +80,12 @@ class StatBox extends Component {
         <StatDisplay statType="nourishment" statValue={this.props.nourishment} />
         <StatDisplay statType="comfort" statValue={this.props.comfort} />
         <StatDisplay statType="spirit" statValue={this.props.spirit} />
-
-        <button onClick={this.bleedHandler}>Apply Bleed</button>
-        <button onClick={this.tiredHandler}>Apply Tiredness</button>
-        <button onClick={this.hungerHandler}>Apply Hunger</button>
+        {/*
+          <button onClick={this.bleedHandler}>Apply Bleed</button>
+          <button onClick={this.tiredHandler}>Apply Tiredness</button>
+          */}
+        <button onClick={this.eatHandler}>Eat Food</button>
+        <button onClick={this.hungerHandler}>Apply Starvation</button>
       </section>
     );
   }
@@ -97,6 +109,7 @@ StatBox.propTypes = {
   feelWired: PropTypes.func.isRequired,
   beStarving: PropTypes.func.isRequired,
   feelWellfed: PropTypes.func.isRequired,
+  eat: PropTypes.func.isRequired,
   tick: PropTypes.func.isRequired,
 };
 
@@ -136,6 +149,7 @@ const mapDispatchToProps = dispatch => ({
   feelWired: amount => dispatch(feelWired(amount)),
   beStarving: amount => dispatch(beStarving(amount)),
   feelWellfed: amount => dispatch(feelWellfed(amount)),
+  eat: amount => dispatch(eat(amount)),
   tick: () => dispatch(tick()),
 });
 

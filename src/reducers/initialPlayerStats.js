@@ -1,10 +1,10 @@
 const initialPlayerStats = {
   health: 100,
   hydration: 80,
-  nourishment: 80,
+  nourishment: 75,
   energy: 100,
-  comfort: 40,
-  spirit: 0,
+  comfort: 50,
+  spirit: 20,
 };
 
 export default initialPlayerStats;

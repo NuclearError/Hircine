@@ -10,3 +10,5 @@ export const loseHunger = amount => ({
   type: LOSE_HUNGER,
   amount,
 });
+
+export const eat = solid => loseHunger(solid.nourishment);

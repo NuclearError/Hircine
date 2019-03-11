@@ -1,13 +1,20 @@
 import { tick } from '../../actions/tick';
 import { takeDamage, healDamage } from '../../actions/health';
 import { hydrate, dehydrate } from '../../actions/hydration';
-import initialPlayerStats from '../initialPlayerStats';
-
 import reduce from '../stats';
+
+const defaultStats = {
+  health: 100,
+  hydration: 80,
+  nourishment: 80,
+  energy: 100,
+  comfort: 40,
+  spirit: 0,
+};
 
 describe('the stats reducer: ', () => {
   it('should handle initial state', () => {
-    expect(reduce(undefined, {})).toEqual(initialPlayerStats);
+    expect(reduce(undefined, {})).toEqual(defaultStats);
   });
 
   describe(' health: ', () => {

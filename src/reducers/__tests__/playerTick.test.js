@@ -1,7 +1,14 @@
 import { tick } from '../../actions/tick';
-
 import reduce from '../playerTick';
-import defaultStats from '../initialPlayerStats';
+
+const defaultStats = {
+  health: 100,
+  hydration: 80,
+  nourishment: 80,
+  energy: 100,
+  comfort: 40,
+  spirit: 0,
+};
 
 const defaultStatsAfterSingleTick = {
   ...defaultStats,

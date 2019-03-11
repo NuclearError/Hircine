@@ -2,17 +2,21 @@ import { TICK } from '../actions/tick';
 import { BLEED_OUT } from '../actions/bleeding';
 import { FEEL_TIRED, FEEL_WIRED } from '../actions/tired';
 import { BE_STARVING, FEEL_WELLFED } from '../actions/starving';
+import { LOSE_HUNGER } from '../actions/nourishment';
 
 // TODO: duped from stats
 const clamp = value => Math.max(Math.min(value, 100), 0);
 
 const adjustmentsByEffect = {
   [BLEED_OUT]: { stat: 'health', increase: false },
-  [FEEL_TIRED]: { stat: 'energy', increase: false },
-  [FEEL_WIRED]: { stat: 'energy', increase: true },
-  [BE_STARVING]: { stat: 'nourishment', increase: false },
-  [FEEL_WELLFED]: { stat: 'nourishment', increase: true },
+  [FEEL_TIRED]: { stat: 'spirit', increase: false },
+  [FEEL_WIRED]: { stat: 'spirit', increase: true },
+  [BE_STARVING]: { stat: 'energy', increase: false },
+  [FEEL_WELLFED]: { stat: 'energy', increase: true },
 };
+
+// Copied from statusEffects
+const effectApplied = (state, type) => state.find(effect => effect.type === type);
 
 /*
 * Original stat manipulation, prior to refactoring, looked like this:
@@ -34,9 +38,15 @@ function statsWithEffectUpdate(stats, effect) {
 
 const statusEffectsTick = (state, action) => {
   if (action.type !== TICK) {
+    if (action.type === LOSE_HUNGER) {
+      // TODO:
+      // if (action.type === anything from the 'removedBy' part of the adjustmentsByEffect list) { remove the corresponding item from the statusEffects array }
+      console.log("StatusEffectsTick registered LOSE_HUNGER");
+      console.log(state.statusEffects);
+      console.log(effectApplied(state, 'BE_STARVING'));
+    }
     return state;
   }
-
   return {
     ...state,
     stats: state.statusEffects.reduce(statsWithEffectUpdate, state.stats),
