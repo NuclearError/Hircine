@@ -41,9 +41,11 @@ const statusEffectsTick = (state, action) => {
     if (action.type === LOSE_HUNGER) {
       // TODO:
       // if (action.type === anything from the 'removedBy' part of the adjustmentsByEffect list) { remove the corresponding item from the statusEffects array }
-      console.log("StatusEffectsTick registered LOSE_HUNGER");
-      console.log(state.statusEffects);
-      console.log(effectApplied(state, 'BE_STARVING'));
+
+      if (effectApplied(state.statusEffects, 'BE_STARVING')) {
+        const thisEffect = effectApplied(state.statusEffects, 'BE_STARVING');
+        state.statusEffects.splice(thisEffect, 1);
+      }
     }
     return state;
   }
