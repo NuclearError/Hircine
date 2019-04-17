@@ -41,11 +41,10 @@ function statsWithEffectUpdate(stats, effect) {
 const statusEffectsTick = (state, action) => {
   if (action.type !== TICK) {
     if (action.type === LOSE_HUNGER) {
-      // TODO:
-      console.log("action type lose hunger registered!");
+      // TODO: make this logic generic for all actions / removedBy effects
       if (effectApplied(state.statusEffects, 'BE_STARVING')) {
         const thisEffect = effectApplied(state.statusEffects, 'BE_STARVING');
-        state.statusEffects.splice(thisEffect, 1);
+        state.statusEffects.splice(thisEffect);
       }
     }
     return state;

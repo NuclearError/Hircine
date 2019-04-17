@@ -74,7 +74,6 @@ describe('The status effects tick reducer, on each tick : ', () => {
     expect(finalState).toEqual(expectedState);
   });
 
-  // at the moment this won't notice the lose hunger effect because the logic is inside the "if not a tick action" code
   it('removes starving effect if player losers hunger', () => {
     const initialState = {
       stats: {
@@ -86,18 +85,14 @@ describe('The status effects tick reducer, on each tick : ', () => {
         beStarving(10),
       ],
     };
-    const finalState = reduce(initialState, tick());
-    console.log(finalState);
-    const otherState = reduce(finalState, tick());
-    console.log(otherState);
-    // const expectedState = {
-    //   stats: {
-    //     energy: 50,
-    //     nourishment: 0,
-    //   },
-    //   statusEffects: [
-    //   ],
-    // };
-    // expect(finalState).toEqual(expectedState);
+    const finalState = reduce(initialState, loseHunger());
+    const expectedState = {
+      stats: {
+        energy: 50,
+        nourishment: 0,
+      },
+      statusEffects: [],
+    };
+    expect(finalState).toEqual(expectedState);
   });
 });
