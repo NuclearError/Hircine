@@ -7,12 +7,14 @@ import { LOSE_HUNGER } from '../actions/nourishment';
 // TODO: duped from stats
 const clamp = value => Math.max(Math.min(value, 100), 0);
 
+// consider making an array if you need to do find/filter on stats, eg. for checking the 'removedBy' value
 const adjustmentsByEffect = {
-  [BLEED_OUT]: { stat: 'health', increase: false },
-  [FEEL_TIRED]: { stat: 'spirit', increase: false },
-  [FEEL_WIRED]: { stat: 'spirit', increase: true },
-  [BE_STARVING]: { stat: 'energy', increase: false },
-  [FEEL_WELLFED]: { stat: 'energy', increase: true },
+  [BLEED_OUT]: { stat: 'health', increase: false }, // removed by healing
+  [FEEL_TIRED]: { stat: 'spirit', increase: false }, // removed by resting
+  [BE_STARVING]: { stat: 'energy', increase: false, removedBy: 'LOSE_HUNGER' },
+
+  [FEEL_WIRED]: { stat: 'spirit', increase: true, prerequisite: 'energy' }, // 100% energy required
+  [FEEL_WELLFED]: { stat: 'energy', increase: true, prerequisite: 'nourishment' }, // 100% nourishment required
 };
 
 // Copied from statusEffects
@@ -40,8 +42,7 @@ const statusEffectsTick = (state, action) => {
   if (action.type !== TICK) {
     if (action.type === LOSE_HUNGER) {
       // TODO:
-      // if (action.type === anything from the 'removedBy' part of the adjustmentsByEffect list) { remove the corresponding item from the statusEffects array }
-
+      console.log("action type lose hunger registered!");
       if (effectApplied(state.statusEffects, 'BE_STARVING')) {
         const thisEffect = effectApplied(state.statusEffects, 'BE_STARVING');
         state.statusEffects.splice(thisEffect, 1);
