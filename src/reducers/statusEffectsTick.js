@@ -1,15 +1,16 @@
+import _ from 'lodash';
+
 import { TICK } from '../actions/tick';
 import { BLEED_OUT } from '../actions/bleeding';
 import { FEEL_TIRED, FEEL_WIRED } from '../actions/tired';
 import { BE_STARVING, FEEL_WELLFED } from '../actions/starving';
-import { LOSE_HUNGER } from '../actions/nourishment';
 
 // TODO: duped from stats
 const clamp = value => Math.max(Math.min(value, 100), 0);
 
 // consider making an array if you need to do find/filter on stats, eg. for checking the 'removedBy' value
 const adjustmentsByEffect = {
-  [BLEED_OUT]: { stat: 'health', increase: false }, // removed by healing
+  [BLEED_OUT]: { stat: 'health', increase: false, removedBy: 'HEAL_DAMAGE' },
   [FEEL_TIRED]: { stat: 'spirit', increase: false }, // removed by resting
   [BE_STARVING]: { stat: 'energy', increase: false, removedBy: 'LOSE_HUNGER' },
 
@@ -40,13 +41,19 @@ function statsWithEffectUpdate(stats, effect) {
 
 const statusEffectsTick = (state, action) => {
   if (action.type !== TICK) {
-    if (action.type === LOSE_HUNGER) {
-      // TODO: make this logic generic for all actions / removedBy effects
-      if (effectApplied(state.statusEffects, 'BE_STARVING')) {
-        const thisEffect = effectApplied(state.statusEffects, 'BE_STARVING');
-        state.statusEffects.splice(thisEffect);
+    ////////////////////////////////////////////
+    // this file is called "statusEffectsTick" but this bit of code is all about
+    // what happens when an action occurs which is NOT a tick.
+    // It's important but should it be its own file completely?
+    const removableEffect = _.findKey(adjustmentsByEffect, { removedBy: action.type });
+    if (removableEffect) {
+      if (effectApplied(state.statusEffects, removableEffect)) {
+        const thisEffect = effectApplied(state.statusEffects, removableEffect);
+        const thisEffectIndex = state.statusEffects.indexOf(thisEffect);
+        state.statusEffects.splice(thisEffectIndex, 1);
       }
     }
+    ////////////////////////////////////////////
     return state;
   }
   return {
