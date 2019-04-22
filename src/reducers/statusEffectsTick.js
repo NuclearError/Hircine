@@ -5,17 +5,42 @@ import { BLEED_OUT } from '../actions/bleeding';
 import { FEEL_TIRED, FEEL_WIRED } from '../actions/tired';
 import { BE_STARVING, FEEL_WELLFED } from '../actions/starving';
 
-// TODO: duped from stats
+// duped from stats
 const clamp = value => Math.max(Math.min(value, 100), 0);
 
-// consider making an array if you need to do find/filter on stats, eg. for checking the 'removedBy' value
 const adjustmentsByEffect = {
-  [BLEED_OUT]: { stat: 'health', increase: false, removedBy: 'HEAL_DAMAGE' },
-  [FEEL_TIRED]: { stat: 'spirit', increase: false }, // removed by resting
-  [BE_STARVING]: { stat: 'energy', increase: false, removedBy: 'LOSE_HUNGER' },
+  // Debuffs
+  [BLEED_OUT]: {
+    stat: 'health',
+    buff: false,
+    removedBy: 'HEAL_DAMAGE',
+  },
+  [FEEL_TIRED]: {
+    stat: 'spirit',
+    buff: false,
+    removedBy: 'GAIN_ENERGY',
+    prerequisite: 'energy',
+  },
+  [BE_STARVING]: {
+    stat: 'energy',
+    buff: false,
+    removedBy: 'LOSE_HUNGER',
+    prerequisite: 'nourishment',
+  },
 
-  [FEEL_WIRED]: { stat: 'spirit', increase: true, prerequisite: 'energy' }, // 100% energy required
-  [FEEL_WELLFED]: { stat: 'energy', increase: true, prerequisite: 'nourishment' }, // 100% nourishment required
+  // Buffs
+  [FEEL_WIRED]: {
+    stat: 'spirit',
+    buff: true,
+    removedBy: 'LOSE_SPIRIT',
+    prerequisite: 'energy',
+  },
+  [FEEL_WELLFED]: {
+    stat: 'energy',
+    buff: true,
+    removedBy: 'GAIN_HUNGER',
+    prerequisite: 'nourishment',
+  },
 };
 
 // Copied from statusEffects
@@ -34,7 +59,7 @@ function statsWithEffectUpdate(stats, effect) {
     return stats;
   }
 
-  const amount = adjustment.increase ? effect.amount : -effect.amount;
+  const amount = adjustment.buff ? effect.amount : -effect.amount;
   const updatedValue = clamp(stats[adjustment.stat] + amount);
   return { ...stats, [adjustment.stat]: updatedValue };
 }
