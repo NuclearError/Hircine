@@ -2,8 +2,10 @@ import { tick } from '../../actions/tick';
 import { bleedOut } from '../../actions/bleeding';
 import { feelTired, feelWired } from '../../actions/tired';
 import { healDamage } from '../../actions/health';
-import { loseHunger } from '../../actions/nourishment';
-import { beStarving } from '../../actions/starving';
+import { loseHunger, gainHunger } from '../../actions/nourishment';
+import { gainEnergy } from '../../actions/energy';
+import { loseSpirit } from '../../actions/spirit';
+import { beStarving, feelWellfed } from '../../actions/starving';
 
 import reduce from '../statusEffectsTick';
 
@@ -129,8 +131,7 @@ describe('The status effects tick reducer, on each tick : ', () => {
       };
       expect(finalState).toEqual(expectedState);
     });
-
-    it('removes starving effect if player losers hunger', () => {
+    it('removes starving effect if player loses hunger', () => {
       const initialState = {
         stats: {
           energy: 50,
@@ -150,7 +151,6 @@ describe('The status effects tick reducer, on each tick : ', () => {
       };
       expect(finalState).toEqual(expectedState);
     });
-
     it('removes bleeding effect if player heals damage', () => {
       const initialState = {
         stats: {
@@ -164,6 +164,66 @@ describe('The status effects tick reducer, on each tick : ', () => {
       const expectedState = {
         stats: {
           health: 50,
+        },
+        statusEffects: [],
+      };
+      expect(finalState).toEqual(expectedState);
+    });
+    it('removes tired effect if player gains energy', () => {
+      const initialState = {
+        stats: {
+          energy: 50,
+          nourishment: 0,
+        },
+        statusEffects: [
+          feelTired(10),
+        ],
+      };
+      const finalState = reduce(initialState, gainEnergy());
+      const expectedState = {
+        stats: {
+          energy: 50,
+          nourishment: 0,
+        },
+        statusEffects: [],
+      };
+      expect(finalState).toEqual(expectedState);
+    });
+    it('removes wired effect if player loses spirit', () => {
+      const initialState = {
+        stats: {
+          energy: 50,
+          spirit: 100,
+        },
+        statusEffects: [
+          feelWired(5),
+        ],
+      };
+      const finalState = reduce(initialState, loseSpirit());
+      const expectedState = {
+        stats: {
+          energy: 50,
+          spirit: 100,
+        },
+        statusEffects: [],
+      };
+      expect(finalState).toEqual(expectedState);
+    });
+    it('removes well fed effect if player gains hunger', () => {
+      const initialState = {
+        stats: {
+          energy: 50,
+          nourishment: 50,
+        },
+        statusEffects: [
+          feelWellfed(5),
+        ],
+      };
+      const finalState = reduce(initialState, gainHunger());
+      const expectedState = {
+        stats: {
+          energy: 50,
+          nourishment: 50,
         },
         statusEffects: [],
       };
